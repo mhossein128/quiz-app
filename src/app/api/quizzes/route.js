@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+
 import prisma from 'src/lib/prisma';
 import { checkAuth, checkAdmin } from 'src/lib/auth';
 

@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import { CONFIG } from 'src/global-config';
-
 import { DashboardContent } from 'src/layouts/dashboard';
 
 import { QuizList } from 'src/sections/quiz';

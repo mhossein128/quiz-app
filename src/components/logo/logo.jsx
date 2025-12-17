@@ -1,15 +1,15 @@
 'use client';
 
-import { useId } from 'react';
 import { mergeClasses } from 'minimal-shared/utils';
 
 import Link from '@mui/material/Link';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 import { RouterLink } from 'src/routes/components';
 
-import { logoClasses } from './classes';
 import { CONFIG } from 'src/global-config';
+
+import { logoClasses } from './classes';
 
 // ----------------------------------------------------------------------
 

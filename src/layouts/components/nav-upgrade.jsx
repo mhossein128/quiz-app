@@ -6,13 +6,11 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
-
 import { CONFIG } from 'src/global-config';
 
 import { Label } from 'src/components/label';
 
-import { useAuthContext, useMockedUser } from 'src/auth/hooks';
+import { useMockedUser, useAuthContext } from 'src/auth/hooks';
 
 // ----------------------------------------------------------------------
 

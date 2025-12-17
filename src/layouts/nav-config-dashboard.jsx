@@ -1,8 +1,20 @@
 import { paths } from 'src/routes/paths';
 
-import { Iconify } from 'src/components/iconify';
+import { CONFIG } from 'src/global-config';
+
+import { SvgColor } from 'src/components/svg-color';
 
 // ----------------------------------------------------------------------
+
+const icon = (name) => <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/${name}.svg`} />;
+
+const ICONS = {
+  dashboard: icon('ic-dashboard'),
+  course: icon('ic-course'),
+  analytics: icon('ic-analytics'),
+  folder: icon('ic-folder'),
+  user: icon('ic-user'),
+};
 
 export const navData = [
   /**
@@ -14,7 +26,7 @@ export const navData = [
       {
         title: 'لیست آزمون‌ها',
         path: paths.dashboard.root,
-        icon: <Iconify icon="mdi:clipboard-text-outline" width={24} />,
+        icon: ICONS.course,
       },
     ],
   },
@@ -27,7 +39,7 @@ export const navData = [
       {
         title: 'ایجاد آزمون',
         path: '/dashboard/admin/create-quiz',
-        icon: <Iconify icon="mdi:plus-circle-outline" width={24} />,
+        icon: ICONS.folder,
         roles: ['ADMIN'],
       },
     ],
