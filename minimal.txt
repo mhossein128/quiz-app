@@ -1,0 +1,2043 @@
+# MINIMAL MUI TEMPLATE - COMPREHENSIVE DOCUMENTATION
+# LLM-Ready Documentation for Minimal UI React Template
+# Generated from: https://docs.minimals.cc/
+
+## TABLE OF CONTENTS
+1. Introduction
+2. Setup & Installation
+3. Project Structure
+4. Global Configuration
+5. Theme & Styling
+6. Routing & Navigation
+7. Authentication
+8. Environment Variables
+9. API Integration
+10. Multi-Language Support
+11. Layout & Components
+12. Development Tools
+13. Deployment & Production
+
+---
+
+## 1. INTRODUCTION
+
+### Overview
+Minimal UI is a professional React Kit that comes with plenty of ready-to-use Material-UI components that will help you to build more beautiful frontend pages.
+
+### Key Features
+- Built with MUI (Material-UI) with two versions: Next.js | Vite
+- Includes a complete design component Figma file to extend your project development
+- The theme is ready to change to any style you want
+- Professional dashboard and client templates
+- Complete authentication system
+- Multi-language support
+- Responsive design
+
+### Framework Support
+- Next.js v14 (next-app-dir)
+- React v18
+- MUI v6
+- Vite.js
+- Create React App (CRA)
+
+### Documentation References
+- MUI Components: https://mui.com/components/
+- Third-party libraries with direct links
+- Example: Carousel - https://www.embla-carousel.com/
+
+### Project Scope
+This project is just the user interface, not including the backend and database.
+
+---
+
+## 2. SETUP & INSTALLATION
+
+### Next.js Setup
+
+#### Step 1: Environment Requirements
+- Next.js v14 (next-app-dir)
+- React v18
+- MUI v6
+
+#### Step 2: Install Dependencies
+```bash
+npm install \
+  @emotion/cache \
+  @emotion/react \
+  @emotion/styled \
+  @mui/lab \
+  @mui/material \
+  @mui/material-nextjs \
+  @mui/x-data-grid \
+  @mui/x-date-pickers \
+  @mui/x-tree-view \
+  @fontsource-variable/public-sans \
+  @fontsource/barlow \
+  minimal-shared
+
+npm i -D @types/node
+```
+
+#### Step 3: Copy and Modify Files
+- Copy and override tsconfig.json / jsconfig.json
+- Copy src/theme
+- Remove src/theme/with-settings
+
+#### Step 4: Create Global CSS (src/global.css)
+```css
+@import '@fontsource-variable/public-sans';
+@import '@fontsource/barlow/400.css';
+@import '@fontsource/barlow/500.css';
+@import '@fontsource/barlow/600.css';
+@import '@fontsource/barlow/700.css';
+@import '@fontsource/barlow/800.css';
+
+html {
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+body, #root, #root__layout {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+```
+
+#### Step 5: Theme Configuration
+Create theme files:
+- src/theme/create-theme.(js|ts)
+- src/theme/theme-provider.(jsx|tsx)
+- src/app/layout.(jsx|tsx)
+
+#### Step 6: Testing
+Create a test page to verify setup works correctly.
+
+---
+
+## 3. PROJECT STRUCTURE - DETAILED ANALYSIS
+
+### Root Directory Structure
+```
+minimal-starter-main/
+├── .editorconfig                 # Code style configuration
+├── .gitignore                    # Git ignore rules
+├── .prettierignore              # Prettier ignore rules
+├── README.md                    # Project documentation
+├── eslint.config.mjs            # ESLint configuration (5193 bytes)
+├── jsconfig.json                # JavaScript configuration for IDE
+├── next.config.mjs              # Next.js configuration (1051 bytes)
+├── package-lock.json            # NPM lock file (305160 bytes)
+├── package.json                 # Project dependencies and scripts (2759 bytes)
+├── prettier.config.mjs          # Prettier formatting configuration
+├── yarn.lock                    # Yarn lock file (187501 bytes)
+├── public/                      # Static assets (324 items)
+└── src/                         # Source code (342 items)
+```
+
+### Public Directory (/public)
+```
+public/
+├── assets/                      # Static assets (317 items)
+│   ├── icons/                   # Icon files for navigation and UI
+│   ├── images/                  # Image assets
+│   ├── illustrations/           # Illustration graphics
+│   └── flags/                   # Country flag icons
+├── favicon.ico                  # Website favicon (15406 bytes)
+├── fonts/                       # Font files (2 items)
+│   ├── vazirmatn/              # Persian/Farsi font files
+│   └── barlow/                 # Barlow font family
+└── logo/                        # Logo assets (4 items)
+    ├── logo-single.svg         # Single logo variant
+    ├── logo-full.svg           # Full logo with text
+    └── logo-variants/          # Different logo versions
+```
+
+### Source Directory (/src) - COMPLETE BREAKDOWN
+
+#### Core Configuration Files
+```
+src/
+├── global-config.js             # Main application configuration (2074 bytes)
+│   ├── UI_CONFIG                # UI feature toggles (workspaces, help, localization, etc.)
+│   └── CONFIG                   # App settings (auth, APIs, environment variables)
+└── global.css                   # Global CSS styles (1405 bytes)
+```
+
+**global-config.js Details:**
+- UI_CONFIG: Controls which UI features are enabled/disabled
+  - workspaces: false
+  - helpLink: false
+  - localization: false
+  - notification: false
+  - searchbar: false
+  - contacts: false
+  - settings: false
+  - account: true
+  - mobileOnly: true
+- CONFIG: Main app configuration
+  - Authentication settings (JWT, Firebase, Auth0, Supabase, Amplify)
+  - API endpoints and keys
+  - App metadata (name, version)
+
+#### App Directory (/src/app) - Next.js App Router
+```
+app/
+├── layout.jsx                   # Root layout component (3090 bytes)
+├── loading.jsx                  # Global loading component (203 bytes)
+├── not-found.jsx               # 404 error page (321 bytes)
+├── page.jsx                    # Homepage component (379 bytes)
+├── providers.jsx               # App-level providers (1543 bytes)
+├── auth/                       # Authentication pages
+│   └── jwt/                    # JWT authentication routes
+│       ├── sign-in/            # Sign-in page
+│       ├── sign-up/            # Sign-up page
+│       └── layout.jsx          # Auth layout wrapper
+└── dashboard/                  # Dashboard pages
+    ├── layout.jsx              # Dashboard layout (461 bytes)
+    ├── loading.jsx             # Dashboard loading (205 bytes)
+    ├── page.jsx                # Dashboard home (319 bytes)
+    ├── two/                    # Dashboard page two
+    ├── three/                  # Dashboard page three
+    └── group/                  # Grouped dashboard pages
+        ├── page.jsx            # Group main page
+        ├── five/               # Sub-page five
+        └── [id]/               # Dynamic route example
+```
+
+**Key App Files:**
+- **layout.jsx**: Root layout with providers hierarchy
+  - I18nProvider → AuthProvider → LocalizationProvider → SettingsProvider → ThemeProvider
+  - Includes InitColorSchemeScript for theme mode
+  - Wraps with MotionLazy, ScreenSize, ProgressBar, SettingsDrawer
+- **providers.jsx**: Additional app-level providers setup
+- **dashboard/layout.jsx**: Dashboard-specific layout with AuthGuard protection
+
+#### Authentication System (/src/auth)
+```
+auth/
+├── components/                  # Auth UI components (6 items)
+│   ├── sign-in-view.jsx        # Sign-in form component
+│   ├── sign-up-view.jsx        # Sign-up form component
+│   ├── reset-password-view.jsx # Password reset form
+│   └── verification-view.jsx   # Email verification component
+├── context/                    # Authentication context (6 items)
+│   ├── auth-context.jsx        # Base auth context (183 bytes)
+│   └── jwt/                    # JWT authentication implementation
+│       ├── auth-provider.jsx   # JWT auth provider (1857 bytes)
+│       ├── action.js           # Auth actions (sign-in, sign-up, etc.)
+│       ├── constant.js         # JWT constants (storage keys)
+│       ├── utils.js            # JWT utilities (token validation, session)
+│       └── index.js            # JWT exports
+├── guard/                      # Route protection (4 items)
+│   ├── auth-guard.jsx          # Protected route wrapper
+│   ├── guest-guard.jsx         # Guest-only route wrapper
+│   ├── role-based-guard.jsx    # Role-based access control
+│   └── index.js                # Guard exports
+├── hooks/                      # Authentication hooks (3 items)
+│   ├── use-auth-context.js     # Auth context hook
+│   ├── use-mocked-user.js      # Mock user hook for development
+│   └── index.js                # Hook exports
+├── utils/                      # Auth utilities (2 items)
+│   ├── format-user.js          # User data formatting
+│   └── index.js                # Utility exports
+└── view/                       # Auth page views (3 items)
+    └── jwt/                    # JWT-specific views
+        ├── sign-in-view.jsx    # JWT sign-in page
+        ├── sign-up-view.jsx    # JWT sign-up page
+        └── index.js            # View exports
+```
+
+**Authentication Flow:**
+1. **AuthProvider** (jwt/auth-provider.jsx): Main authentication state management
+2. **AuthGuard**: Protects dashboard routes, redirects to login if unauthenticated
+3. **JWT Utils**: Token validation, session management, storage handling
+4. **Auth Actions**: Sign-in, sign-up, logout functionality with API calls
+
+#### Components System (/src/components)
+```
+components/
+├── animate/                     # Animation components (26 items)
+│   ├── motion-lazy.jsx         # Lazy-loaded Framer Motion
+│   ├── motion-viewport.jsx     # Viewport animations
+│   ├── variants/               # Animation variants library
+│   └── index.js                # Animation exports
+├── custom-popover/             # Popover components (4 items)
+│   ├── custom-popover.jsx      # Base popover component
+│   ├── arrow-style.jsx         # Popover arrow styling
+│   └── index.js                # Popover exports
+├── custom-tabs/                # Tab components (2 items)
+├── file-thumbnail/             # File preview components (5 items)
+├── flag-icon/                  # Country flag components (3 items)
+├── hook-form/                  # React Hook Form components (5 items)
+│   ├── rhf-text-field.jsx      # Form text input
+│   ├── rhf-select.jsx          # Form select dropdown
+│   ├── rhf-checkbox.jsx        # Form checkbox
+│   └── form-provider.jsx       # Form context provider
+├── iconify/                    # Icon system (5 items)
+│   ├── iconify.jsx             # Main icon component
+│   ├── icon-button.jsx         # Icon button wrapper
+│   └── index.js                # Icon exports
+├── label/                      # Label components (4 items)
+│   ├── label.jsx               # Base label component
+│   ├── styles.js               # Label styling
+│   └── index.js                # Label exports
+├── loading-screen/             # Loading components (3 items)
+│   ├── loading-screen.jsx      # Full-screen loader
+│   ├── splash-screen.jsx       # App splash screen
+│   └── index.js                # Loading exports
+├── logo/                       # Logo components (3 items)
+│   ├── logo.jsx                # Main logo component
+│   ├── logo-single.jsx         # Single logo variant
+│   └── index.js                # Logo exports
+├── nav-section/                # Navigation components (24 items)
+│   ├── components/             # Nav sub-components
+│   ├── horizontal/             # Horizontal navigation
+│   ├── vertical/               # Vertical navigation
+│   ├── mini/                   # Mini navigation
+│   ├── styles/                 # Navigation styling
+│   └── utils/                  # Navigation utilities
+├── progress-bar/               # Progress indicators (3 items)
+├── scrollbar/                  # Custom scrollbar (4 items)
+├── search-not-found/           # Search empty states (2 items)
+├── settings/                   # Settings system (16 items)
+│   ├── context/                # Settings context
+│   ├── drawer/                 # Settings drawer UI
+│   ├── settings-config.js      # Settings configuration
+│   └── server.js               # Server-side settings
+├── snackbar/                   # Notification system (4 items)
+└── svg-color/                  # SVG color utilities (3 items)
+```
+
+**Key Component Systems:**
+- **nav-section**: Complete navigation system with vertical, horizontal, and mini variants
+- **settings**: Theme and layout customization system
+- **hook-form**: Form components integrated with React Hook Form
+- **animate**: Animation system using Framer Motion
+
+#### Layouts System (/src/layouts)
+```
+layouts/
+├── core/                       # Core layout components (6 items)
+│   ├── layout-section.jsx      # Base layout wrapper
+│   ├── header-section.jsx      # Header component
+│   ├── main-section.jsx        # Main content area
+│   ├── footer-section.jsx      # Footer component
+│   ├── css-vars.js             # Layout CSS variables
+│   └── index.js                # Core exports
+├── dashboard/                  # Dashboard layout (7 items)
+│   ├── layout.jsx              # Main dashboard layout (7795 bytes)
+│   ├── content.jsx             # Dashboard content wrapper
+│   ├── nav-vertical.jsx        # Vertical navigation
+│   ├── nav-horizontal.jsx      # Horizontal navigation
+│   ├── nav-mobile.jsx          # Mobile navigation
+│   ├── css-vars.js             # Dashboard CSS variables
+│   └── index.js                # Dashboard exports
+├── auth-split/                 # Authentication layout (4 items)
+│   ├── layout.jsx              # Split auth layout
+│   ├── section.jsx             # Auth sections
+│   └── index.js                # Auth layout exports
+├── simple/                     # Simple layout (3 items)
+│   ├── layout.jsx              # Minimal layout
+│   └── index.js                # Simple exports
+├── components/                 # Layout components (18 items)
+│   ├── account-button.jsx      # Account menu button
+│   ├── account-drawer.jsx      # Account drawer (5984 bytes)
+│   ├── account-popover.jsx     # Account popover menu
+│   ├── contacts-popover.jsx    # Contacts popover
+│   ├── language-popover.jsx    # Language selector
+│   ├── menu-button.jsx         # Mobile menu button
+│   ├── nav-toggle-button.jsx   # Navigation toggle
+│   ├── nav-upgrade.jsx         # Upgrade prompt
+│   ├── notifications-drawer/   # Notifications system
+│   ├── searchbar/              # Global search
+│   ├── settings-button.jsx     # Settings button
+│   ├── sign-in-button.jsx      # Sign-in button
+│   ├── sign-out-button.jsx     # Sign-out button
+│   └── workspaces-popover.jsx  # Workspace selector
+├── nav-config-dashboard.jsx    # Dashboard navigation config (2051 bytes)
+├── nav-config-account.jsx      # Account navigation config
+├── nav-config-workspace.jsx    # Workspace navigation config
+└── screen-size.jsx             # Screen size detection (2912 bytes)
+```
+
+**Layout Architecture:**
+- **DashboardLayout**: Main layout with header, sidebar, and content areas
+- **Navigation System**: Three variants (vertical, horizontal, mobile) with role-based permissions
+- **Header Components**: Account management, notifications, search, settings
+- **Responsive Design**: Automatic layout switching based on screen size
+
+#### Theme System (/src/theme)
+```
+theme/
+├── core/                       # Core theme files (55 items)
+│   ├── components/             # MUI component overrides (44 items)
+│   │   ├── accordion.js        # Accordion styling
+│   │   ├── alert.js            # Alert styling
+│   │   ├── appbar.js           # AppBar styling
+│   │   ├── button.js           # Button styling
+│   │   ├── card.js             # Card styling
+│   │   ├── checkbox.js         # Checkbox styling
+│   │   ├── chip.js             # Chip styling
+│   │   ├── data-grid.js        # DataGrid styling
+│   │   ├── dialog.js           # Dialog styling
+│   │   ├── drawer.js           # Drawer styling
+│   │   ├── fab.js              # FloatingActionButton styling
+│   │   ├── form-control-label.js # FormControlLabel styling
+│   │   ├── form-helper-text.js # FormHelperText styling
+│   │   ├── form-label.js       # FormLabel styling
+│   │   ├── icon-button.js      # IconButton styling
+│   │   ├── input-base.js       # InputBase styling
+│   │   ├── linear-progress.js  # LinearProgress styling
+│   │   ├── list-item-button.js # ListItemButton styling
+│   │   ├── loading-button.js   # LoadingButton styling
+│   │   ├── menu.js             # Menu styling
+│   │   ├── menu-item.js        # MenuItem styling
+│   │   ├── outlined-input.js   # OutlinedInput styling
+│   │   ├── paper.js            # Paper styling
+│   │   ├── popover.js          # Popover styling
+│   │   ├── radio.js            # Radio styling
+│   │   ├── rating.js           # Rating styling
+│   │   ├── select.js           # Select styling
+│   │   ├── skeleton.js         # Skeleton styling
+│   │   ├── slider.js           # Slider styling
+│   │   ├── stepper.js          # Stepper styling
+│   │   ├── switch.js           # Switch styling
+│   │   ├── tab.js              # Tab styling
+│   │   ├── table.js            # Table styling
+│   │   ├── table-cell.js       # TableCell styling
+│   │   ├── table-pagination.js # TablePagination styling
+│   │   ├── tabs.js             # Tabs styling
+│   │   ├── text-field.js       # TextField styling
+│   │   ├── timeline.js         # Timeline styling
+│   │   ├── toggle-button.js    # ToggleButton styling
+│   │   ├── tooltip.js          # Tooltip styling
+│   │   ├── tree-view.js        # TreeView styling
+│   │   └── index.js            # Component exports
+│   ├── mixins/                 # Theme mixins (6 items)
+│   │   ├── can-hover.js        # Hover state mixins
+│   │   ├── hide-scrollbar.js   # Scrollbar hiding
+│   │   ├── text-gradient.js    # Text gradient effects
+│   │   └── index.js            # Mixin exports
+│   ├── palette.js              # Color palette (2433 bytes)
+│   ├── shadows.js              # Shadow definitions (2703 bytes)
+│   ├── custom-shadows.js       # Custom shadow system (1643 bytes)
+│   ├── typography.js           # Typography settings (2581 bytes)
+│   └── index.js                # Core theme exports
+├── with-settings/              # Settings integration (5 items)
+│   ├── update-core-with-settings.js     # Core theme updates
+│   ├── update-components-with-settings.js # Component updates
+│   └── index.js                # Settings exports
+├── create-theme.js             # Theme factory (1542 bytes)
+├── theme-config.js             # Theme configuration (2154 bytes)
+├── theme-provider.jsx          # Theme provider component
+├── theme-overrides.js          # Theme overrides
+├── breakpoints.js              # Responsive breakpoints
+├── create-classes.js           # CSS class utilities
+└── index.js                    # Theme exports
+```
+
+**Theme Configuration (theme-config.js):**
+- **Direction**: RTL support (set to 'rtl')
+- **Default Mode**: Light/dark theme (set to 'light')
+- **Font Family**: Vazirmatn Variable (Persian), Barlow (secondary)
+- **Color Palette**: Complete color system with semantic colors
+- **CSS Variables**: Modern CSS custom properties support
+
+#### Routing System (/src/routes)
+```
+routes/
+├── components/                 # Route components (2 items)
+│   ├── router-link.jsx         # Custom router link
+│   └── index.js                # Route component exports
+├── hooks/                      # Routing hooks (5 items)
+│   ├── use-active-link.js      # Active link detection
+│   ├── use-pathname.js         # Current pathname hook
+│   ├── use-router.js           # Router utilities
+│   ├── use-search-params.js    # Search params hook
+│   └── index.js                # Hook exports
+└── paths.js                    # Route path definitions (1607 bytes)
+```
+
+**Route Definitions (paths.js):**
+- **Authentication Routes**: JWT, Firebase, Auth0, Supabase, Amplify sign-in/up paths
+- **Dashboard Routes**: Main dashboard, sub-pages, grouped routes
+- **Dynamic Routing**: Support for parameterized routes
+
+#### Internationalization (/src/locales)
+```
+locales/
+├── langs/                      # Language files (10 items)
+│   ├── en.json                 # English translations
+│   ├── fr.json                 # French translations
+│   ├── vi.json                 # Vietnamese translations
+│   ├── cn.json                 # Chinese translations
+│   ├── ar.json                 # Arabic translations
+│   └── ...                     # Additional languages
+├── utils/                      # Localization utilities (1 item)
+├── all-langs.js                # Language configuration (2412 bytes)
+├── i18n-provider.jsx           # i18n context provider
+├── locales-config.js           # Localization settings
+├── localization-provider.jsx   # MUI localization provider
+├── server.js                   # Server-side i18n (2010 bytes)
+├── use-locales.js              # Localization hook
+└── index.js                    # Locales exports
+```
+
+#### Mock Data System (/src/_mock)
+```
+_mock/
+├── _blog.js                    # Blog post mock data
+├── _calendar.js                # Calendar event data
+├── _files.js                   # File system mock data (3378 bytes)
+├── _invoice.js                 # Invoice mock data
+├── _job.js                     # Job listing data (5076 bytes)
+├── _map/                       # Map-related data (3 items)
+├── _mock.js                    # Mock utilities (2632 bytes)
+├── _order.js                   # Order/transaction data
+├── _others.js                  # Miscellaneous data (7211 bytes)
+├── _overview.js                # Dashboard overview data (9284 bytes)
+├── _product.js                 # Product catalog data
+├── _tour.js                    # Tour/travel data (4230 bytes)
+├── _user.js                    # User profile data (4541 bytes)
+├── assets.js                   # Asset URL mappings (23106 bytes)
+└── index.js                    # Mock data exports
+```
+
+#### Additional Directories
+```
+src/
+├── api/                        # API utilities (1 item)
+├── assets/                     # Source assets (25 items)
+├── lib/                        # External libraries (1 item)
+├── sections/                   # Page sections (3 items)
+└── utils/                      # Utility functions (1 item)
+```
+
+### File Purpose and Functionality
+
+#### Navigation Configuration
+- **nav-config-dashboard.jsx**: Defines dashboard menu structure with icons, paths, and permissions
+- **nav-config-account.jsx**: Account-related navigation items
+- **nav-config-workspace.jsx**: Workspace switching navigation
+
+#### Menu System Location
+The main menu system is located in:
+1. **Configuration**: `/src/layouts/nav-config-dashboard.jsx` - Defines menu items, icons, and structure
+2. **Components**: `/src/components/nav-section/` - Navigation rendering components
+3. **Layout Integration**: `/src/layouts/dashboard/layout.jsx` - Menu integration in dashboard layout
+4. **Navigation Variants**: 
+   - Vertical: `/src/layouts/dashboard/nav-vertical.jsx`
+   - Horizontal: `/src/layouts/dashboard/nav-horizontal.jsx`
+   - Mobile: `/src/layouts/dashboard/nav-mobile.jsx`
+
+#### Login System Structure
+Authentication files are organized in `/src/auth/`:
+1. **Login Forms**: `/src/auth/view/jwt/sign-in-view.jsx`
+2. **Authentication Logic**: `/src/auth/context/jwt/auth-provider.jsx`
+3. **Route Protection**: `/src/auth/guard/auth-guard.jsx`
+4. **Login Pages**: `/src/app/auth/jwt/sign-in/page.jsx`
+5. **Session Management**: `/src/auth/context/jwt/utils.js`
+
+#### Settings System
+Settings and theme customization:
+1. **Settings Context**: `/src/components/settings/context/`
+2. **Settings UI**: `/src/components/settings/drawer/`
+3. **Theme Integration**: `/src/theme/with-settings/`
+4. **Settings Button**: `/src/layouts/components/settings-button.jsx`
+
+This structure provides a complete, modular, and scalable foundation for building React applications with Material-UI, featuring comprehensive authentication, theming, internationalization, and layout management systems.
+
+---
+
+## 4. GLOBAL CONFIGURATION
+
+### Configuration Setup
+Generic configuration for several APIs located in global-config.ts:
+
+```javascript
+export const CONFIG: ConfigValue = {
+  appName: 'Minimal UI',
+  appVersion: packageJson.version,
+  serverUrl: process.env.NEXT_PUBLIC_SERVER_URL ?? '',
+  assetsDir: process.env.NEXT_PUBLIC_ASSETS_DIR ?? '',
+  isStaticExport: JSON.parse(`${process.env.BUILD_STATIC_EXPORT}`),
+  
+  // Authentication
+  auth: {
+    method: 'jwt', // jwt | amplify | firebase | supabase | auth0
+    skip: false,
+    redirectPath: paths.dashboard.root,
+  },
+  
+  // Mapbox
+  mapboxApiKey: process.env.NEXT_PUBLIC_MAPBOX_API_KEY ?? '',
+  
+  // Firebase
+  firebase: {
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY ?? '',
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN ?? '',
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID ?? '',
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET ?? '',
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID ?? '',
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APPID ?? '',
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID ?? '',
+  },
+  
+  // AWS Amplify
+  amplify: {
+    userPoolId: process.env.NEXT_PUBLIC_AWS_AMPLIFY_USER_POOL_ID ?? '',
+    userPoolWebClientId: process.env.NEXT_PUBLIC_AWS_AMPLIFY_USER_POOL_WEB_CLIENT_ID ?? '',
+    region: process.env.NEXT_PUBLIC_AWS_AMPLIFY_REGION ?? '',
+  },
+  
+  // Auth0
+  auth0: {
+    clientId: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID ?? '',
+    domain: process.env.NEXT_PUBLIC_AUTH0_DOMAIN ?? '',
+    callbackUrl: process.env.NEXT_PUBLIC_AUTH0_CALLBACK_URL ?? '',
+  },
+  
+  // Supabase
+  supabase: {
+    url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? '',
+    key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '',
+  },
+};
+```
+
+### Static Export Configuration
+For Next.js static export:
+```javascript
+const isStaticExport = 'true';
+```
+
+---
+
+## 5. THEME & STYLING
+
+### MUI Component Overrides
+Customize and override MUI components globally by modifying files in:
+`src/theme/core/components`
+
+#### Style Overrides
+Customize the styles of MUI components globally using styleOverrides.
+
+#### Default Props
+Set default props for MUI components globally using defaultProps.
+
+Example AppBar override:
+```javascript
+// src/theme/core/components/appbar.tsx
+const MuiAppBar: Components<Theme>['MuiAppBar'] = {
+  defaultProps: {
+    color: 'transparent'
+  },
+  styleOverrides: {
+    root: {
+      boxShadow: 'none',
+    },
+  },
+};
+```
+
+### CSS Variables (v6.0.0+)
+Using CSS theme variables in Material UI v6+ with the Minimal design system.
+
+#### Color Variables
+```javascript
+// Old
+color: theme.palette.common.white,
+
+// New
+color: theme.vars.palette.common.white,
+```
+
+#### Alpha Transparency
+Replace alpha() with varAlpha() for full support with CSS variables:
+```javascript
+// Old
+import { alpha } from '@mui/material/styles';
+alpha(theme.palette.text.primary, 0.2)
+
+// New
+import { varAlpha } from 'minimal-shared/utils';
+varAlpha(theme.vars.palette.text.primaryChannel, 0.2)
+```
+
+#### Dark Mode Support
+Use theme.applyStyles('dark', { ... }) to apply overrides for dark mode.
+
+### Colors
+Customize theme colors in:
+- src/theme/theme-config.ts
+- src/theme/core/palette.ts
+
+Color palette structure:
+```json
+{
+  "primary": {
+    "lighter": "#C8FAD6",
+    "light": "#5BE49B",
+    "main": "#00A76F",
+    "dark": "#007867",
+    "darker": "#004B50",
+    "contrastText": "#FFFFFF"
+  }
+}
+```
+
+#### Color Tools
+- Eva design colors: https://colors.eva.design/
+- Material UI colors: https://mui.com/customization/color/
+
+Token mapping:
+- 100 → lighter
+- 300 → light
+- 500 → main
+- 700 → dark
+- 900 → darker
+
+### Shadows
+Custom shadows configuration:
+- shadows: src/theme/core/shadows
+- customShadows: src/theme/core/customShadows
+
+### Icons (v7.0.0+)
+Using Iconify for icon management:
+
+#### Register Icons
+Browse and choose icons from Iconify icon sets: https://iconify.design/icon-sets
+
+#### Custom Icons
+Register custom icons for your project.
+
+#### Remove Unused Icons
+```bash
+npx find-unused-iconify
+npx find-unused-iconify -d
+```
+
+### Logo Customization
+Change branding:
+- Logo: src/components/logo
+- Favicon: public/favicon.ico
+
+#### Change Favicon
+Use favicon.io to generate favicon from your logo.
+
+#### Logo Implementation
+Image file approach:
+```javascript
+const logo = (
+  <Box
+    alt="logo"
+    component="img"
+    src="/logo/logo-single.svg"
+    width={width}
+    height={height}
+  />
+);
+```
+
+SVG component approach with gradients and theming support available.
+
+---
+
+## 6. ROUTING & NAVIGATION
+
+### Overview
+Routing is based on react-router for Vite.js and CRA, and Next.js App Router for Next.js projects.
+
+### Add Navigation Item
+Add new items in dashboard layout navigation:
+```javascript
+// src/layouts/nav-config-dashboard.tsx
+export const navData = [
+  {
+    subheader: 'Overview',
+    items: [
+      {
+        title: 'One',
+        path: paths.dashboard.root,
+        icon: ICONS.dashboard,
+        info: <Label>v{CONFIG.appVersion}</Label>,
+      },
+      {
+        title: 'New page',
+        path: '/dashboard/new-page',
+        icon: ICONS.analytics
+      },
+    ],
+  },
+];
+```
+
+### Add Routes (Vite.js | CRA)
+```javascript
+// src/routes/sections/dashboard.tsx
+const NewPage = lazy(() => import('src/pages/dashboard/new-page'));
+
+export const dashboardRoutes = [
+  {
+    path: 'dashboard',
+    element: CONFIG.auth.skip ? dashboardLayout() : <AuthGuard>{dashboardLayout()}</AuthGuard>,
+    children: [
+      { element: <IndexPage />, index: true },
+      { path: 'new-page', element: <NewPage /> },
+    ],
+  },
+];
+```
+
+### Add Routes (Next.js)
+Create a new file at: `src/app/dashboard/new-page/page.tsx`
+
+### Set Index Page
+Configure default page when visiting website:
+```javascript
+export const routesSection = [
+  {
+    // Redirect to default path (skip homepage)
+    path: '/',
+    element: <Navigate to={CONFIG.auth.redirectPath} replace />,
+  },
+  {
+    // Show homepage as index
+    path: '/',
+    element: (
+      <MainLayout>
+        <Outlet />
+      </MainLayout>
+    ),
+    children: [{ element: <HomePage />, index: true }],
+  },
+];
+```
+
+### Navigation Usage
+```javascript
+import Link from '@mui/material/Link';
+import { RouterLink } from 'src/routes/components';
+
+<Link
+  component={RouterLink}
+  href="/new"
+  underline="none"
+  variant="subtitle2"
+>
+  Go to About us
+</Link>
+```
+
+### Role-Based Navigation
+```javascript
+const navData = [
+  {
+    subheader: 'Marketing',
+    items: [
+      {
+        title: 'Landing',
+        path: '/landing',
+        icon: <Iconify icon="carbon:bat" width={1} />,
+        roles: ['admin'],
+        caption: 'Display only admin role',
+      },
+      {
+        title: 'Services',
+        path: '/services',
+        icon: <Iconify icon="carbon:cyclist" width={1} />,
+        roles: ['admin', 'user'],
+      },
+    ],
+  },
+];
+```
+
+### Subfolder Deployment (v6.1.0+)
+
+#### Vite.js
+```bash
+VITE_ASSETS_DIR=/sub
+```
+
+```javascript
+export default defineConfig({
+  base: '/sub/',
+  ...
+});
+```
+
+```javascript
+<BrowserRouter basename="sub">
+  ...
+</BrowserRouter>
+```
+
+#### Next.js
+```bash
+NEXT_PUBLIC_ASSETS_DIR=/sub
+```
+
+```javascript
+const nextConfig = {
+  basePath: '/sub',
+  ...
+};
+```
+
+---
+
+## 7. AUTHENTICATION
+
+### JWT Authentication
+
+#### Choose Authentication Strategy
+Update the auth method in your config:
+```javascript
+auth: {
+  method: 'jwt',
+},
+```
+
+#### Environment Variables
+Update your .env file:
+```bash
+VITE_SERVER_URL=https://api-dev-minimal-v6.vercel.app
+```
+
+### User Information
+
+#### Default Behavior (Mocked User)
+```javascript
+import { useMockedUser } from 'src/auth/hooks';
+const { user } = useMockedUser();
+```
+
+#### Real Auth Context
+```javascript
+import { useAuthContext } from 'src/auth/hooks';
+const { user } = useAuthContext();
+```
+
+### Supported Authentication Methods
+- JWT
+- AWS Amplify
+- Firebase
+- Supabase
+- Auth0
+
+---
+
+## 8. ENVIRONMENT VARIABLES
+
+### Next.js
+Use the prefix: `NEXT_PUBLIC_`
+```bash
+NEXT_PUBLIC_MAP=
+NEXT_PUBLIC_WEBSITE_URL=
+```
+
+Access in code:
+```javascript
+process.env.NEXT_PUBLIC_MAP;
+process.env.NEXT_PUBLIC_WEBSITE_URL;
+```
+
+### Vite.js
+Use the prefix: `VITE_`
+```bash
+VITE_MAP=
+VITE_WEBSITE_URL=
+```
+
+Access in code:
+```javascript
+import.meta.env.VITE_MAP;
+import.meta.env.VITE_WEBSITE_URL;
+```
+
+### Create React App
+Use the prefix: `REACT_APP_`
+```bash
+REACT_APP_MAP=
+REACT_APP_WEBSITE_URL=
+```
+
+Access in code:
+```javascript
+process.env.REACT_APP_MAP;
+process.env.REACT_APP_WEBSITE_URL;
+```
+
+---
+
+## 9. API INTEGRATION
+
+### Basic SWR Example
+```javascript
+import useSWR from 'swr';
+import { fetcher } from 'src/utils/axios';
+
+function ProductList() {
+  const { data, error, isLoading } = useSWR('/api/product/list', fetcher);
+  
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
+  
+  return (
+    <>
+      {data.products.map((product) => (
+        <div key={product.id}>{product.name}</div>
+      ))}
+    </>
+  );
+}
+```
+
+### Set Base URL
+Define base URL in .env:
+```bash
+REACT_APP_HOST_API=https://www.your-domain.com
+```
+
+Setup axios instance:
+```javascript
+const axiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_HOST_API
+});
+```
+
+### Without Base URL
+For parallel API development:
+```javascript
+import useSWR from 'swr';
+import axios from 'axios';
+
+const fetcher = (url) => axios.get(url).then((res) => res.data);
+
+function ProductList() {
+  const { data, error, isLoading } = useSWR(
+    `https://www.your-domain.com/api/product/list`,
+    fetcher
+  );
+  
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
+  
+  return (
+    <>
+      {data.products.map((product) => (
+        <div key={product.id}>{product.name}</div>
+      ))}
+    </>
+  );
+}
+```
+
+---
+
+## 10. MULTI-LANGUAGE SUPPORT
+
+### Setup/Remove
+Search for the keyword `src/locales` to find and configure relevant components and files.
+
+### Add New Content
+Add translations in language-specific JSON files inside `src/locales`.
+
+English (en.json):
+```json
+{
+  "heading": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+  "nested": {
+    "nested1": "nested En"
+  }
+}
+```
+
+French (fr.json):
+```json
+{
+  "heading": "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression",
+  "nested": {
+    "nested1": "nested Fr"
+  }
+}
+```
+
+### Usage Example
+```javascript
+import { useLocales, useTranslate } from 'src/locales';
+
+function MultiLanguage() {
+  const { t, onChangeLang } = useTranslate();
+  const { allLang, currentLang } = useLocales();
+  
+  return (
+    <>
+      <RadioGroup
+        row
+        value={currentLang.value}
+        onChange={(event) => onChangeLang(event.target.value)}
+      >
+        {allLang.map((lang) => (
+          <FormControlLabel
+            key={lang.label}
+            value={lang.value}
+            label={lang.label}
+            control={<Radio />}
+          />
+        ))}
+      </RadioGroup>
+      
+      <Typography variant="h2">{t('heading')}</Typography>
+      <Typography variant="body2">{t('nested.nested1')}</Typography>
+    </>
+  );
+}
+```
+
+### RTL Support (v7.1.0+)
+Enable RTL when selecting Arabic language:
+
+Theme config:
+```javascript
+export const themeConfig = {
+  ...
+  direction: 'rtl'
+};
+```
+
+Fallback language:
+```javascript
+export const fallbackLng: LangCode = 'ar';
+```
+
+Theme provider integration:
+```javascript
+import { useLocaleDirectionSync } from 'src/locales';
+
+export function ThemeProvider({ themeOverrides, children, ...other }: ThemeProviderProps) {
+  ...
+  useLocaleDirectionSync();
+  return (...);
+}
+```
+
+---
+
+## 11. LAYOUT & COMPONENTS
+
+### Layout Configuration
+
+#### Core Layout
+Update layout size settings in: `src/layouts/core/css-vars.ts`
+
+```javascript
+export function layoutSectionVars(theme: Theme) {
+  return {
+    '--layout-nav-zIndex': theme.zIndex.drawer + 1,
+    '--layout-nav-mobile-width': '288px',
+    '--layout-header-blur': '8px',
+    '--layout-header-zIndex': theme.zIndex.appBar + 1,
+    '--layout-header-mobile-height': '64px',
+    '--layout-header-desktop-height': '72px',
+  };
+}
+```
+
+#### Dashboard Layout
+Update layout size settings in: `src/layouts/dashboard/css-vars.ts`
+
+```javascript
+export function dashboardLayoutVars(theme: Theme) {
+  return {
+    '--layout-transition-easing': 'linear',
+    '--layout-transition-duration': '120ms',
+    '--layout-nav-mini-width': '88px',
+    '--layout-nav-vertical-width': '300px',
+    '--layout-nav-horizontal-height': '64px',
+    '--layout-dashboard-content-pt': theme.spacing(1),
+    '--layout-dashboard-content-pb': theme.spacing(8),
+    '--layout-dashboard-content-px': theme.spacing(5),
+  };
+}
+```
+
+#### Change Navigation Items
+- MainLayout → src/layouts/config-nav-main
+- DashboardLayout → src/layouts/config-nav-dashboard
+
+### Settings Configuration
+
+#### Change Default Settings
+When modifying default settings, clear localStorage or cookies to avoid conflicts.
+
+```javascript
+// src/App.(jsx|tsx) or src/app/layout.(jsx|tsx)
+import { defaultSettings } from 'src/components/settings';
+
+<SettingsProvider defaultSettings={defaultSettings}>
+  ...
+</SettingsProvider>
+```
+
+#### Base Theme (No Localization/Settings)
+```javascript
+// src/theme/create-theme.(js|ts)
+export const baseTheme = {
+  colorSchemes: {
+    light: {
+      palette: palette.light,
+      shadows: shadows.light,
+      customShadows: customShadows.light
+    },
+    dark: {
+      palette: palette.dark,
+      shadows: shadows.dark,
+      customShadows: customShadows.dark
+    },
+  },
+  mixins,
+  components,
+  typography,
+  shape: { borderRadius: 8 },
+  direction: themeConfig.direction,
+  cssVariables: themeConfig.cssVariables,
+}
+
+export function createTheme({ themeOverrides }) {
+  const theme = createMuiTheme(baseTheme, themeOverrides);
+  return theme;
+}
+```
+
+#### With Settings
+```javascript
+export function createTheme({ settingsState, themeOverrides }) {
+  const updatedCore = settingsState ? applySettingsToTheme(baseTheme, settingsState) : baseTheme;
+  const updatedComponents = settingsState ? applySettingsToComponents(baseTheme.components, settingsState) : {};
+  const theme = createMuiTheme(updatedCore, updatedComponents, themeOverrides);
+  return theme;
+}
+```
+
+#### Change Mode
+```javascript
+// src/theme/theme-config.(js|ts)
+export const themeConfig = {
+  ...
+  defaultMode: 'light', // light | dark | system
+};
+```
+
+---
+
+## 12. DEVELOPMENT TOOLS
+
+### Dependencies Management
+Core dependencies categorized by functionality:
+
+#### Core Framework
+- next
+- react
+- react-dom
+
+#### UI Framework and Styling
+- @mui/material
+- @mui/material-nextjs
+- @mui/lab
+- @mui/x-data-grid
+- @mui/x-date-pickers
+- @mui/x-tree-view
+- @emotion/react
+- @emotion/styled
+- @emotion/cache
+
+#### Forms and Validation
+- react-hook-form
+- @hookform/resolvers
+- zod
+
+#### Charts and Data Visualization
+- apexcharts
+- react-apexcharts
+
+#### Authentication
+- @auth0/auth0-react
+- aws-amplify
+- firebase
+- @supabase/supabase-js
+
+#### Utilities
+- axios
+- dayjs
+- nprogress
+- swr
+
+### Clean Project
+Remove unused code to optimize performance:
+
+#### Step 1: Remove Unused Pages
+Delete unused pages in `/pages` or `/app`.
+
+#### Step 2: Create knip.jsonc File
+```json
+{
+  "$schema": "https://unpkg.com/knip@5/schema-jsonc.json",
+  "paths": {
+    "src/*": ["./src/*"],
+  },
+  "project": ["src/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
+  "ignoreExportsUsedInFile": true,
+  "ignoreDependencies": [
+    "@fontsource.+"
+  ],
+  "ignore": [
+    "src/_mock/**"
+  ]
+}
+```
+
+#### Step 3: Identify and Delete Unused Files
+```bash
+npx knip
+```
+
+### Tailwind CSS Integration
+
+#### Install Tailwind CSS
+```bash
+npm install -D tailwindcss postcss autoprefixer
+```
+
+#### Create Configuration Files
+tailwind.config.js:
+```javascript
+const config = {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  corePlugins: {
+    // Remove the Tailwind CSS preflight styles so it can use Material UI's preflight instead (CssBaseline).
+    preflight: false,
+  },
+  plugins: [],
+};
+
+export default config;
+```
+
+postcss.config.js:
+```javascript
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+#### Update Global Styles
+Modify src/global.css to include Tailwind's layers:
+```css
+@import 'simplebar-react/dist/simplebar.min.css';
+
+========================================
+MINIMAL TEMPLATE COMPONENTS DOCUMENTATION
+========================================
+
+This document provides a comprehensive overview of all components available in the Minimal template located at:
+c:\Users\rafza\minimal\minimal-starter-main\src\components\
+
+## COMPONENT STRUCTURE OVERVIEW
+
+The components directory contains 39 main component categories, each designed for specific UI functionality:
+
+### 1. ANIMATE COMPONENTS
+**Location**: `src/components/animate/`
+**Purpose**: Animation utilities and components using Framer Motion
+**Key Files**:
+- `animate-text.jsx` - Advanced text animation with character-by-character effects
+- `animate-logo.jsx` - Logo animation effects
+- `animate-border.jsx` - Border animation effects
+- `animate-count-up.jsx` - Number counting animations
+- `motion-container.jsx` - Container for motion animations
+- `motion-viewport.jsx` - Viewport-based animations
+- `back-to-top-button.jsx` - Animated back-to-top button
+- `scroll-progress/` - Scroll progress indicators
+
+**Animation Variants Available**:
+- Fade effects (in/out/up/down/left/right)
+- Slide effects (in/out/up/down/left/right)
+- Scale effects (in/out/x/y)
+- Rotate effects
+- Bounce effects
+- Flip effects
+- Zoom effects
+- Path animations
+- Background animations
+
+**Usage**: Perfect for creating engaging user interfaces with smooth animations, page transitions, and interactive elements.
+
+### 2. CAROUSEL COMPONENTS
+**Location**: `src/components/carousel/`
+**Purpose**: Advanced carousel/slider functionality
+**Key Features**:
+- Multi-slide support
+- Thumbnail navigation
+- Arrow controls
+- Dot indicators
+- Progress bar
+- Auto-scroll and autoplay
+- Parallax effects
+- Responsive breakpoints
+
+**Main Components**:
+- `carousel.jsx` - Main carousel container
+- `carousel-slide.jsx` - Individual slide wrapper
+- `carousel-arrow-buttons.jsx` - Navigation arrows
+- `carousel-dot-buttons.jsx` - Dot navigation
+- `carousel-thumbs.jsx` - Thumbnail navigation
+- `carousel-progress-bar.jsx` - Progress indicator
+
+**Usage**: Ideal for image galleries, product showcases, testimonials, and any content that needs sliding presentation.
+
+### 3. CHART COMPONENTS
+**Location**: `src/components/chart/`
+**Purpose**: Data visualization using ApexCharts
+**Features**:
+- Lazy loading for performance
+- Multiple chart types support
+- Loading states
+- Legend customization
+- Chart selection controls
+- Responsive design
+
+**Main Components**:
+- `chart.jsx` - Main chart wrapper with lazy loading
+- `chart-loading.jsx` - Loading state component
+- `chart-legends.jsx` - Custom legend component
+- `chart-select.jsx` - Chart type selector
+- `use-chart.js` - Chart configuration hook
+
+**Usage**: Perfect for dashboards, analytics, reports, and any data visualization needs.
+
+### 4. COLOR UTILITIES
+**Location**: `src/components/color-utils/`
+**Purpose**: Color selection and preview tools
+**Components**:
+- `color-picker.jsx` - Interactive color picker
+- `color-preview.jsx` - Color preview display
+
+**Usage**: Useful for theme customization, design tools, and user preference settings.
+
+### 5. COUNTRY SELECT
+**Location**: `src/components/country-select/`
+**Purpose**: Country selection dropdown with flags
+**Features**:
+- Flag icons
+- Search functionality
+- Autocomplete support
+
+**Usage**: Essential for forms requiring country selection, shipping addresses, and user profiles.
+
+### 6. CUSTOM BREADCRUMBS
+**Location**: `src/components/custom-breadcrumbs/`
+**Purpose**: Navigation breadcrumb system
+**Components**:
+- `custom-breadcrumbs.jsx` - Main breadcrumb container
+- `breadcrumb-link.jsx` - Individual breadcrumb links
+- `back-link.jsx` - Back navigation link
+- `more-links.jsx` - Additional links dropdown
+
+**Features**:
+- Icon support
+- Active state handling
+- More links overflow
+- Back navigation
+
+**Usage**: Essential for multi-level navigation, admin panels, and complex site structures.
+
+### 7. CUSTOM DATA GRID
+**Location**: `src/components/custom-data-grid/`
+**Purpose**: Enhanced data grid functionality
+**Components**:
+- `grid-actions-cell-item.jsx` - Action buttons for grid cells
+- `toolbar-core.jsx` - Core toolbar functionality
+- `toolbar-extend-settings.jsx` - Extended toolbar settings
+
+**Usage**: Perfect for admin panels, data management interfaces, and complex table operations.
+
+### 8. CUSTOM DATE RANGE PICKER
+**Location**: `src/components/custom-date-range-picker/`
+**Purpose**: Advanced date range selection
+**Features**:
+- Range selection
+- Custom date formats
+- Validation
+- Preset ranges
+
+**Usage**: Ideal for filtering, reporting, booking systems, and analytics dashboards.
+
+### 9. CUSTOM DIALOG
+**Location**: `src/components/custom-dialog/`
+**Purpose**: Modal dialogs and confirmations
+**Components**:
+- `confirm-dialog.jsx` - Confirmation dialog with actions
+
+**Usage**: Essential for user confirmations, alerts, and modal content display.
+
+### 10. CUSTOM POPOVER
+**Location**: `src/components/custom-popover/`
+**Purpose**: Floating content containers
+**Features**:
+- Positioning utilities
+- Custom styling
+- Click outside handling
+
+**Usage**: Perfect for tooltips, dropdown menus, and contextual information display.
+
+### 11. CUSTOM TABS
+**Location**: `src/components/custom-tabs/`
+**Purpose**: Enhanced tab navigation
+**Features**:
+- Custom styling
+- Icon support
+- Responsive behavior
+
+**Usage**: Ideal for organizing content, settings panels, and multi-step forms.
+
+### 12. EDITOR COMPONENTS
+**Location**: `src/components/editor/`
+**Purpose**: Rich text editor using TipTap
+**Features**:
+- WYSIWYG editing
+- Code highlighting
+- Image insertion
+- Link management
+- Text formatting
+- Fullscreen mode
+- Placeholder support
+
+**Main Components**:
+- `editor.jsx` - Main editor component
+- `toolbar.jsx` - Editor toolbar
+- `code-highlight-block.jsx` - Code syntax highlighting
+- `heading-block.jsx` - Heading formatting
+- `image-block.jsx` - Image handling
+- `link-block.jsx` - Link management
+
+**Usage**: Perfect for content management systems, blogs, documentation, and any rich text editing needs.
+
+### 13. EMPTY CONTENT
+**Location**: `src/components/empty-content/`
+**Purpose**: Empty state displays
+**Features**:
+- Customizable messages
+- Icon support
+- Action buttons
+
+**Usage**: Essential for showing empty states in lists, search results, and data tables.
+
+### 14. FILE THUMBNAIL
+**Location**: `src/components/file-thumbnail/`
+**Purpose**: File type visualization
+**Features**:
+- Multiple file type support
+- Preview generation
+- Download functionality
+
+**Usage**: Perfect for file managers, document libraries, and upload interfaces.
+
+### 15. FILTERS RESULT
+**Location**: `src/components/filters-result/`
+**Purpose**: Display and manage filter results
+**Features**:
+- Active filter display
+- Clear filters functionality
+- Result count
+
+**Usage**: Essential for search interfaces, product catalogs, and data filtering.
+
+### 16. FLAG ICON
+**Location**: `src/components/flag-icon/`
+**Purpose**: Country flag display
+**Features**:
+- SVG flag icons
+- Multiple sizes
+- Country code support
+
+**Usage**: Perfect for country selectors, language switchers, and international interfaces.
+
+### 17. HOOK FORM COMPONENTS
+**Location**: `src/components/hook-form/`
+**Purpose**: React Hook Form integration components
+**Comprehensive Form Components**:
+- `form-provider.jsx` - Form context provider
+- `rhf-text-field.jsx` - Text input fields
+- `rhf-select.jsx` - Select dropdowns
+- `rhf-checkbox.jsx` - Checkbox inputs
+- `rhf-radio-group.jsx` - Radio button groups
+- `rhf-switch.jsx` - Toggle switches
+- `rhf-slider.jsx` - Range sliders
+- `rhf-rating.jsx` - Star rating component
+- `rhf-date-picker.jsx` - Date selection
+- `rhf-phone-input.jsx` - Phone number input
+- `rhf-number-input.jsx` - Number input with validation
+- `rhf-autocomplete.jsx` - Autocomplete fields
+- `rhf-country-select.jsx` - Country selection
+- `rhf-upload.jsx` - File upload handling
+- `rhf-editor.jsx` - Rich text editor integration
+- `rhf-code.jsx` - Code input fields
+- `schema-helper.js` - Validation schema utilities
+
+**Usage**: Essential for all form implementations, providing consistent validation, error handling, and user experience.
+
+### 18. ICONIFY
+**Location**: `src/components/iconify/`
+**Purpose**: Icon management system
+**Features**:
+- Thousands of icons available
+- SVG-based rendering
+- Custom sizing
+- Color customization
+
+**Usage**: Universal icon solution for buttons, navigation, status indicators, and decorative elements.
+
+### 19. IMAGE COMPONENTS
+**Location**: `src/components/image/`
+**Purpose**: Enhanced image handling
+**Features**:
+- Lazy loading
+- Error handling
+- Responsive sizing
+- Optimization
+
+**Usage**: Perfect for galleries, product images, avatars, and any image display needs.
+
+### 20. LABEL COMPONENTS
+**Location**: `src/components/label/`
+**Purpose**: Status and category labels
+**Features**:
+- Multiple variants
+- Color coding
+- Size options
+- Custom styling
+
+**Usage**: Ideal for status indicators, tags, categories, and badges.
+
+### 21. LIGHTBOX
+**Location**: `src/components/lightbox/`
+**Purpose**: Image and media lightbox viewer
+**Features**:
+- Full-screen viewing
+- Zoom functionality
+- Slideshow mode
+- Thumbnail navigation
+- Video support
+- Caption display
+
+**Main Component**:
+- `lightbox.jsx` - Full-featured lightbox with controls
+
+**Usage**: Perfect for image galleries, product photos, portfolios, and media presentations.
+
+### 22. LOADING SCREEN
+**Location**: `src/components/loading-screen/`
+**Purpose**: Loading state indicators
+**Features**:
+- Multiple loading animations
+- Customizable messages
+- Overlay support
+
+**Usage**: Essential for page transitions, data loading, and async operations.
+
+### 23. LOGO
+**Location**: `src/components/logo/`
+**Purpose**: Brand logo display
+**Features**:
+- Multiple sizes
+- Animation support
+- Responsive behavior
+
+**Usage**: Perfect for headers, footers, and branding elements.
+
+### 24. MAP COMPONENTS
+**Location**: `src/components/map/`
+**Purpose**: Interactive map integration
+**Features**:
+- Multiple map providers
+- Marker support
+- Custom styling
+- Interaction handling
+
+**Usage**: Ideal for location displays, store finders, and geographic data visualization.
+
+### 25. MARKDOWN
+**Location**: `src/components/markdown/`
+**Purpose**: Markdown content rendering
+**Features**:
+- Syntax highlighting
+- Custom styling
+- Link handling
+- Image support
+
+**Usage**: Perfect for documentation, blog posts, and formatted content display.
+
+### 26. MEGA MENU
+**Location**: `src/components/mega-menu/`
+**Purpose**: Complex navigation menus
+**Variants**:
+- `horizontal/` - Horizontal mega menu
+- `vertical/` - Vertical mega menu
+- `mobile/` - Mobile-optimized menu
+
+**Features**:
+- Multi-level navigation
+- Rich content support
+- Responsive design
+- Custom styling
+
+**Usage**: Essential for complex websites with extensive navigation needs.
+
+### 27. NAV BASIC
+**Location**: `src/components/nav-basic/`
+**Purpose**: Simple navigation components
+**Variants**:
+- `desktop/` - Desktop navigation
+- `mobile/` - Mobile navigation
+
+**Features**:
+- Clean design
+- Responsive behavior
+- Icon support
+
+**Usage**: Perfect for simple websites and applications with basic navigation needs.
+
+### 28. NAV SECTION
+**Location**: `src/components/nav-section/`
+**Purpose**: Advanced navigation sections
+**Variants**:
+- `vertical/` - Vertical navigation
+- `horizontal/` - Horizontal navigation
+- `mini/` - Minimized navigation
+
+**Features**:
+- Collapsible sections
+- Active state management
+- Icon integration
+- Multi-level support
+
+**Usage**: Ideal for admin panels, dashboards, and complex application navigation.
+
+### 29. NUMBER INPUT
+**Location**: `src/components/number-input/`
+**Purpose**: Enhanced number input controls
+**Features**:
+- Increment/decrement buttons
+- Validation
+- Custom formatting
+- Range limits
+
+**Usage**: Perfect for quantity selectors, price inputs, and numeric data entry.
+
+### 30. ORGANIZATIONAL CHART
+**Location**: `src/components/organizational-chart/`
+**Purpose**: Hierarchical data visualization
+**Features**:
+- Tree structure display
+- Interactive nodes
+- Zoom and pan
+- Custom styling
+
+**Usage**: Ideal for company structures, decision trees, and hierarchical data display.
+
+### 31. PHONE INPUT
+**Location**: `src/components/phone-input/`
+**Purpose**: International phone number input
+**Features**:
+- Country code selection
+- Format validation
+- Flag display
+- Auto-formatting
+
+**Usage**: Essential for contact forms, user registration, and international applications.
+
+### 32. PROGRESS BAR
+**Location**: `src/components/progress-bar/`
+**Purpose**: Progress indication
+**Features**:
+- Linear and circular variants
+- Animated transitions
+- Custom colors
+- Label support
+
+**Usage**: Perfect for loading states, form progress, and task completion indicators.
+
+### 33. SCROLLBAR
+**Location**: `src/components/scrollbar/`
+**Purpose**: Custom scrollbar styling
+**Features**:
+- Cross-browser compatibility
+- Custom styling
+- Smooth scrolling
+- Mobile support
+
+**Usage**: Enhances user experience in scrollable content areas.
+
+### 34. SEARCH NOT FOUND
+**Location**: `src/components/search-not-found/`
+**Purpose**: No results state display
+**Features**:
+- Customizable messages
+- Suggestion support
+- Action buttons
+
+**Usage**: Essential for search interfaces and filtered content displays.
+
+### 35. SETTINGS
+**Location**: `src/components/settings/`
+**Purpose**: Application settings management
+**Components**:
+- `settings-provider.jsx` - Settings context provider
+- `settings-drawer.jsx` - Settings panel
+- `base-option.jsx` - Basic setting options
+- `font-options.jsx` - Font selection
+- `nav-layout-option.jsx` - Navigation layout options
+- `presets-options.jsx` - Theme presets
+- `fullscreen-button.jsx` - Fullscreen toggle
+
+**Features**:
+- Theme customization
+- Layout options
+- Font selection
+- Preset themes
+- Persistent settings
+
+**Usage**: Essential for user customization, theme switching, and application preferences.
+
+### 36. SNACKBAR
+**Location**: `src/components/snackbar/`
+**Purpose**: Toast notifications
+**Features**:
+- Multiple variants (success, error, warning, info)
+- Auto-dismiss
+- Action buttons
+- Queue management
+
+**Usage**: Perfect for user feedback, notifications, and status messages.
+
+### 37. SVG COLOR
+**Location**: `src/components/svg-color/`
+**Purpose**: SVG icon colorization
+**Features**:
+- Dynamic color application
+- Theme integration
+- Performance optimization
+
+**Usage**: Ideal for customizable icons and theme-aware graphics.
+
+### 38. TABLE COMPONENTS
+**Location**: `src/components/table/`
+**Purpose**: Advanced table functionality
+**Components**:
+- `use-table.js` - Table state management hook
+- `table-head-custom.jsx` - Custom table headers
+- `table-pagination-custom.jsx` - Custom pagination
+- `table-selected-action.jsx` - Bulk actions
+- `table-no-data.jsx` - Empty state
+- `table-skeleton.jsx` - Loading skeleton
+- `table-empty-rows.jsx` - Empty row handling
+
+**Features**:
+- Sorting and filtering
+- Pagination
+- Row selection
+- Bulk actions
+- Loading states
+- Responsive design
+
+**Usage**: Essential for data tables, admin panels, and data management interfaces.
+
+### 39. UPLOAD COMPONENTS
+**Location**: `src/components/upload/`
+**Purpose**: File upload functionality
+**Components**:
+- `upload.jsx` - Main upload component with drag & drop
+- `upload-box.jsx` - Simple upload box
+- `upload-avatar.jsx` - Avatar upload with cropping
+- `preview-single-file.jsx` - Single file preview
+- `preview-multi-file.jsx` - Multiple file preview
+- `rejection-files.jsx` - Error handling for rejected files
+- `placeholder.jsx` - Upload placeholder
+
+**Features**:
+- Drag and drop support
+- Multiple file upload
+- File type validation
+- Size restrictions
+- Preview generation
+- Progress indication
+- Error handling
+
+**Usage**: Perfect for file managers, profile pictures, document uploads, and media management.
+
+## INTEGRATION GUIDELINES
+
+### Dependencies
+The components rely on several key libraries:
+- **Material-UI (MUI)**: Core UI framework
+- **Framer Motion**: Animation library
+- **React Hook Form**: Form management
+- **TipTap**: Rich text editor
+- **ApexCharts**: Data visualization
+- **React Dropzone**: File uploads
+- **Iconify**: Icon system
+
+### Usage Patterns
+1. **Import components**: Use named imports from component directories
+2. **Styling**: Components support MUI's `sx` prop and custom `className`
+3. **Theming**: All components integrate with MUI theme system
+4. **Responsive**: Components are mobile-first and responsive by default
+5. **Accessibility**: Built with accessibility best practices
+
+### Best Practices
+1. **Performance**: Use lazy loading for heavy components
+2. **Consistency**: Follow established patterns for props and styling
+3. **Customization**: Leverage `slotProps` for deep customization
+4. **Validation**: Use schema-helper for form validation
+5. **State Management**: Use provided hooks for complex state
+
+This comprehensive component library provides everything needed to build modern, professional web applications with consistent design and excellent user experience.
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  ...
+}
+```
+
+### Migration to CRA
+Guide to migrate from Vite.js to Create React App:
+
+#### Step 1: Prepare Project
+Do not delete or modify files before running migration command.
+
+#### Step 2: Run Migration Command
+Based on Minimal UI version:
+- v6.2.0 | v6.3.0 | v7.0.0: `npx vite-to-cra@latest`
+- v6.0.0 | v6.0.1 | v6.1.0: `npx vite-to-cra@6.1.0`
+- v5: `npx vite-to-cra@5.0.0`
+
+---
+
+## 13. DEPLOYMENT & PRODUCTION
+
+### Mock Server Setup
+
+#### Local Development
+1. Download resource from README.md or MOCK_API.md
+2. Start local server in minimal-api-dev folder
+3. Ensure running on correct port: http://localhost:7272
+4. Update .env in your project:
+
+```bash
+VITE_SERVER_URL=http://localhost:7272
+VITE_ASSET_URL=http://localhost:7272
+```
+
+#### Production Deployment
+1. Push minimal-api-dev source code to GitHub
+2. Deploy on Vercel
+3. Update next.config.mjs:
+
+```javascript
+const nextConfig = {
+  reactStrictMode: true,
+  env: {
+    DEV_API: 'http://localhost:7272',
+    PRODUCTION_API: 'https://your-domain-api.vercel.app',
+  },
+};
+
+export default nextConfig;
+```
+
+4. Update .env for production:
+
+```bash
+VITE_SERVER_URL=https://your-domain-api.vercel.app
+VITE_ASSET_URL=https://your-domain-api.vercel.app
+```
+
+### Environment Configuration
+Ensure proper environment variables are set for:
+- API endpoints
+- Authentication providers
+- Third-party services
+- Asset directories
+
+### Performance Optimization
+- Remove unused dependencies
+- Optimize images and assets
+- Enable code splitting
+- Configure proper caching headers
+- Use static export when possible
+
+---
+
+## ADDITIONAL RESOURCES
+
+### Official Links
+- MUI Documentation: https://mui.com/
+- Minimal UI Components: https://minimals.cc/components/
+- Iconify Icons: https://iconify.design/icon-sets
+- Eva Design Colors: https://colors.eva.design/
+
+### Support
+- Email: Contact through official documentation
+- Documentation: https://docs.minimals.cc/
+- Component Examples: https://minimals.cc/
+
+### Version Information
+This documentation covers Minimal UI v6+ with support for:
+- Next.js v14
+- React v18
+- MUI v6
+- TypeScript support
+- Modern React patterns
+
+---
+
+## CONCLUSION
+
+This comprehensive documentation provides all necessary information to work with the Minimal MUI template effectively. The template offers a robust foundation for building modern React applications with Material-UI, supporting multiple frameworks and providing extensive customization options.
+
+For the most up-to-date information, always refer to the official documentation at https://docs.minimals.cc/

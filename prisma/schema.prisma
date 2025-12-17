@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        String        @id @default(cuid())
+  username  String        @unique
+  password  String
+  role      Role          @default(USER)
+  attempts  QuizAttempt[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Quiz {
+  id          String        @id @default(cuid())
+  title       String
+  description String        @db.Text
+  questions   Question[]
+  attempts    QuizAttempt[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Question {
+  id       String   @id @default(cuid())
+  text     String   @db.Text
+  quiz     Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quizId   String
+  options  Option[]
+  order    Int
+
+  @@index([quizId])
+}
+
+model Option {
+  id         String   @id @default(cuid())
+  text       String
+  isCorrect  Boolean  @default(false)
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String
+
+  @@index([questionId])
+}
+
+model QuizAttempt {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  quiz      Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quizId    String
+  score     Int
+  total     Int
+  answers   Json
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([quizId])
+}
