@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3032 --turbopack",
-    "start": "next start -p 3033",
+    "start": "next start -p 3032",
     "build": "next build",
     "db:seed": "node prisma/seed.js",
     "db:reset": "npx prisma migrate reset --force",
