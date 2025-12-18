@@ -42,6 +42,12 @@ export const navData = [
         icon: ICONS.folder,
         roles: ['ADMIN'],
       },
+      {
+        title: 'مدیریت کاربران',
+        path: '/dashboard/admin/users',
+        icon: ICONS.user,
+        roles: ['ADMIN'],
+      },
     ],
   },
 ];
